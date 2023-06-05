@@ -10,12 +10,23 @@ import (
 func main() {
 	fmt.Printf("Running project: `%s`\n", postal.ProjectName())
 
+	prxList := postal.NewProxyList()
+	fmt.Printf("%s", prxList)
+	prx := prxList.RandomProxy()
+
+	proxi, ok := prx.(*postal.ProxyRecord)
+	if !ok {
+		fmt.Printf("not a proxy assertion!")
+		os.Exit(1)
+	}
+	fmt.Printf("\n%s\n", proxi)
+
 	// These functions demonstrate two separate checks to detect if the code is being
 	// run inside a docker container in debug mode, or production mode!
 	//
 	// Note: Valid only for docker containers generated using the Makefile command
-	firstCheck()
-	secondCheck()
+	//firstCheck()
+	//secondCheck()
 }
 
 func firstCheck() bool {
